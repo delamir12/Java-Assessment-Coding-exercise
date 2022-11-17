@@ -1,6 +1,7 @@
 package com.assestment.coding.exercise.javafinalassestment.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,12 +14,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(length = 25)
     private String firstName;
+    @Column(length = 25)
     private String lastName;
+    @Column(length = 20)
     private String phoneNumber;
+    @Column(length = 25)
     private String email;
-
-
 
     public Integer getId() {
         return id;

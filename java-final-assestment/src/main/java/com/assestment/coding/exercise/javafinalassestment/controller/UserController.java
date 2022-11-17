@@ -6,22 +6,26 @@ import com.assestment.coding.exercise.javafinalassestment.service.impl.UserServi
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
+@CrossOrigin("http://localhost:3000/")
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
 
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<User>> listAllUsers(){
         List<User> users = userService.getAllUsers();
 
@@ -41,10 +45,21 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         User newUser = userService.createUser(user);
         return ResponseEntity.ok(newUser);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateClient(@PathVariable int id, @RequestBody User user) {
+        return ResponseEntity.ok(userService.updateUser(id,user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteClient(@PathVariable int id){
+        userService.deleteUser(id);
+        return ResponseEntity.ok().build();
     }
 
 

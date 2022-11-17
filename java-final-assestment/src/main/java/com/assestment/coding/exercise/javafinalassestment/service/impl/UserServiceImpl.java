@@ -28,4 +28,20 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public void deleteUser(int id) {
+       userRepository.deleteById(id);
+    }
+
+    @Override
+    public User updateUser(int id,User user) {
+        User currentUser = userRepository.findById(id);
+        currentUser.setFirstName(user.getFirstName());
+        currentUser.setLastName(user.getLastName());
+        currentUser.setPhoneNumber(user.getPhoneNumber());
+        currentUser.setEmail(user.getEmail());
+        return currentUser = userRepository.save(user);
+
+    }
 }
